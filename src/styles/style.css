@@ -1,0 +1,58 @@
+* {
+  font-size: 10px;
+  list-style: none;
+}
+
+.list {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.list__item {
+  border-bottom: 0.3rem solid; 
+}
+
+.list__item span {
+  font-size: 2em;
+}
+
+.list__bottom {
+  margin: 20px 20px 0 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.list__filter  {
+  display: flex;
+  gap: 0.7em;
+}
+
+
+/* STATUS ITEM */
+.not-finished {
+  color: red;
+}
+
+.finished {
+  color: green;
+  text-decoration: line-through;
+}
+
+
+
+/* CHECKBOX */
+
+.custom-checkbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+/* FILTER */
+
+.filter__all, .filter__active, .filter__completed {
+  background-color: aqua;
+}
