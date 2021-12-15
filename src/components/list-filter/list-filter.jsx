@@ -5,8 +5,11 @@ const ListFilter = () => {
   const dispatch = useDispatch();
   const {filter: filterState, take} = useSelector(state => state);
 
-  const handleFilter = (filter) => {
-    dispatch({type: filter, payload: { skip: 0, take }})
+  const handleFilter = (filterOption) => {
+    dispatch({type: 'SET_FILTER', payload: filterOption})
+    dispatch({type: 'SET_FILTERLED_LIST', payload: filterOption})
+    dispatch({type: 'SET_SKIP'});
+    dispatch({type: 'GET_PAGINATED_LIST'})
   }
 
 
@@ -14,9 +17,15 @@ const ListFilter = () => {
     <>
       <div className="list__info"></div>
       <ul className="list__filter filter">
-        <li className={filterState === 'all' ? 'list__filter filter__all filter' : 'list__filter filter' } onClick={() => handleFilter('GET_ALL_TODOS')}>All</li>
-        <li className={filterState === 'active' ? 'list__filter filter__active filter' : 'list__filter filter' } onClick={() => handleFilter('GET_ACTIVE_TODOS')}>Active</li>
-        <li className={filterState === 'completed' ? 'list__filter filter__completed filter' : 'list__filter filter' } onClick={() => handleFilter('GET_COMPLETED_TODOS')}>Completed</li>
+        <li className={filterState === 'all' ? 'list__filter filter__all filter' : 'list__filter filter' } 
+            onClick={() => handleFilter('all')}
+        >All</li>
+        <li className={filterState === 'active' ? 'list__filter filter__active filter' : 'list__filter filter' } 
+            onClick={() => handleFilter('active')}
+        >Active</li>
+        <li className={filterState === 'completed' ? 'list__filter filter__completed filter' : 'list__filter filter' } 
+            onClick={() => handleFilter('completed')}
+        >Completed</li>
       </ul>
     </>
 

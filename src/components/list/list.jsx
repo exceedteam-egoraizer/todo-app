@@ -21,14 +21,14 @@ const List = () => {
   const getTODOList = async () => {
     const data = await axios.get('https://jsonplaceholder.typicode.com/users/1/todos')
     dispatch({type: 'GET_TODO_LIST', payload: data.data})
+    dispatch({type: 'SET_FILTERLED_LIST'})
+    dispatch({type: 'GET_PAGINATED_LIST'})
   }
 
   const toggleTODOItem = (item) => {
     dispatch({type: 'TOGGLE_STATUS_TODO', payload: item})
   }
 
-  console.log('TODO data', allTodos)
-  console.log('Paginate data', paginatedTodos)
   return (
     <div className="list">
       <ul className="list__items">

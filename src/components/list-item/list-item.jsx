@@ -11,7 +11,6 @@ const ListItem = (props) => {
   const [text, setText] = useState(title);
   
   const editTask = (id ,text) => {
-    console.log(text)
     dispatch({type: 'EDIT_TASK', payload: {id, text}})
   }
 
