@@ -1,58 +1,58 @@
-import React from "react";
-import { useState } from "react";
-import { useDispatch} from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Checkbox, Input, Button } from "antd";
 
-
- 
 const ListItem = (props) => {
-  const {userId, id, title, completed} = props.item;
   const dispatch = useDispatch()
-  const [typeOfInput, setTypeOfInput] = useState('checkbox');
+  const { id, title, completed } = props.item;
   const [text, setText] = useState(title);
+  const [typeOfInput, setTypeOfInput] = useState('checkbox');
   
   const editTask = (id ,text) => {
     dispatch({type: 'EDIT_TASK', payload: {id, text}})
   }
 
-  const editText = (e) => {
-    e.preventDefault();
-    setTypeOfInput('text')
+  const toggleTODOItem = (item) => {
+    dispatch({type: 'TOGGLE_STATUS_TODO', payload: item})
+    dispatch({type: 'GET_PAGINATED_LIST', payload: item})
   }
-  
-  return (
-    <li className={completed ? 'list_item item finished' : 'list_item item not-finished'} onDoubleClick={(e) => editText(e)}>
-      <input
-        type={typeOfInput}
-        value={typeOfInput === 'text' && text}
-        checked={completed}
-        onChange={({target: { value }}) => {
-          if (typeOfInput === 'checkbox') {
-            props.toggleTODOItem(props.item)
-          } else {
-            setText(value);
-          }
-        }}/>
-      <span>{typeOfInput === 'checkbox' ? title : null}</span>
-      {typeOfInput === 'text' && (
-        <div>
-          <button 
+
+  const changeInputType = (typeOfInput) => {
+    if (typeOfInput === 'checkbox') {
+      return (
+          <Checkbox checked={completed} onChange={() => toggleTODOItem(props.item)}>
+            <span>{title}</span>
+          </Checkbox>
+      )
+    }
+    if (typeOfInput === 'text') {
+      return (
+        <>
+          <Input placeholder={title} onChange={({ target: { value }}) => setText(value)}/>
+          <Button 
+            type="primary" 
+            size={'default'}
             onClick={() => {
               editTask(id, text);
               setTypeOfInput('checkbox');
-            }}
-          >
-              Ok
-          </button>
-          <button
+          }}>Ok</Button>
+          <Button
+            type="primary"
+            danger
             onClick={() => {
               setTypeOfInput('checkbox');
               setText(title);
-            }}
-          >
-            Exit
-          </button>
-        </div>
-      )}
+          }}>Exit</Button>
+        </>
+      )
+    }
+    return null;
+  }
+
+
+  return (
+    <li className={completed ? 'list_item item finished' : 'list_item item'}>
+        {changeInputType(typeOfInput)}
     </li>
   )
 }
