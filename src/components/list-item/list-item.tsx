@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Checkbox, Input, Button } from "antd";
 import { ListItemProps, Item} from '../interfaces'
-//import { Item } from "../list/list";
 
 const ListItem = (props: ListItemProps) => {
   const dispatch = useDispatch()
@@ -15,8 +14,9 @@ const ListItem = (props: ListItemProps) => {
   }
 
   const toggleTODOItem = (item : Item) => {
-    dispatch({type: 'TOGGLE_STATUS_TODO', payload: item})
-    dispatch({type: 'GET_PAGINATED_LIST', payload: item})
+    dispatch({ type: 'TOGGLE_STATUS_TODO', payload: item })
+    dispatch({ type: 'SET_CURRENT_PAGE' });
+    dispatch({ type: 'GET_PAGINATED_LIST', payload: item })
   }
 
   const changeInputType = (typeOfInput : boolean) => {
@@ -30,11 +30,10 @@ const ListItem = (props: ListItemProps) => {
     if (!typeOfInput) { 
       return (
         <>
-          <Input placeholder={title} onChange={({ target: { value }}) => setText(value)}/>
+          <Input placeholder={title} onChange={({ target: { value }}) => setText(value)} className="list__item-open"/>
           <Button 
             type="primary" 
             onClick={() => {
-              console.log(id, text)
               editTask(id, text);
               setTypeOfInput(!typeOfInput);
           }}>Ok</Button>
@@ -48,7 +47,7 @@ const ListItem = (props: ListItemProps) => {
         </>
       )
     }
-    return (<div>Some troubles</div>);
+    return (<div>Something wrong</div>);
   }
 
   const changeTypeOfInput = (e: React.MouseEvent<HTMLLIElement, MouseEvent>) => {

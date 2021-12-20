@@ -1,4 +1,3 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { InitStateProps, Filter} from '../interfaces';
 import { Radio } from 'antd';
@@ -8,11 +7,10 @@ const ListFilter = () => {
   const { todolist, paginatedList } = useSelector<InitStateProps, InitStateProps>(( state ) => state)
 
   const handleFilter = (filterOption : Filter) => {
-    dispatch({type: 'SET_FILTER', payload: { filterOption }})
-    console.log('filterOption', filterOption)
-    dispatch({type: 'SET_SKIP'});
-    dispatch({type: 'GET_PAGINATED_LIST'})
-    console.log('Pagin list on filter', paginatedList)
+    dispatch({ type: 'SET_FILTER', payload: { filterOption } })
+    dispatch({ type: 'SET_CURRENT_PAGE' })
+    dispatch({ type: 'SET_SKIP' });
+    dispatch({ type: 'GET_PAGINATED_LIST' })
   }
 
 

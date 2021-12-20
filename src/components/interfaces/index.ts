@@ -27,22 +27,10 @@ interface Item {
 
 interface Actions {
     type: string;
-    payload: any; // here
+    payload: any;
 }
 
-// interface Payload {
-//     userId?: number;
-//     id?: number;
-//     text?: string;
-//     title?: string;
-//     filter?: Filter;
-//     completed?: boolean;
-//     skip: number;
-//     todolist?: Item[];
-//     paginatedList?: Item[];
-// }
-
-export {
+export { 
     Filter,
     ListItemProps, 
     Item,

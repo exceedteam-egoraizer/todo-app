@@ -14,11 +14,19 @@
 
 .list__items {
   width: 500px;
+  height: 150px;
   margin: auto;
 }
 
+.list__item {
+  display: flex;
+}
+
+.list__item-open {
+  text-decoration: none;
+}
+
 .list__bottom {
-  margin: 20px 20px 0 20px;
   display: flex;
   justify-content: space-between;
 }

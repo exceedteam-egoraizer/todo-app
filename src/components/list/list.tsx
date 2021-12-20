@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { InitStateProps, Item } from "../interfaces";
 import axios from "axios";
@@ -26,9 +26,7 @@ const List = () => {
     <div className="list">
       <Typography.Title>To-Do List</Typography.Title>
       <ul className="list__items">
-        {paginatedList.map((item : Item) => {
-          return ( <ListItem key={item.id} item={item} /> )
-        })}
+        {paginatedList.map((item : Item) => (<ListItem key={item.id} item={item} />))}
       </ul>
       <div className="list__bottom">
         <ListFilter />

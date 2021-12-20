@@ -1,6 +1,5 @@
-import { applyMiddleware, createStore } from 'redux';
+import { createStore } from 'redux';
 import { Item, InitStateProps, Actions } from '../components/interfaces';
-// import logger from 'redux-logger';
 
 const initState: InitStateProps = {
   loading: true,
@@ -13,14 +12,17 @@ const initState: InitStateProps = {
   currentPage: 1
 };
 
-
 function reducer (state = initState, action: Actions) { 
   switch (action.type) {
     case 'SET_FILTER': 
-    console.log('entry filter', action.payload?.filterOption)
       return {
         ...state,
         filter:  action.payload.filterOption
+      }
+    case 'SET_CURRENT_PAGE':
+      return {
+        ...state,
+        currentPage: action.payload?.currentPage || 1
       }
 
     case 'SET_SKIP': 
@@ -37,11 +39,9 @@ function reducer (state = initState, action: Actions) {
       }
 
     case 'GET_PAGINATED_LIST':
-      console.log('current state filter: ', state.filter.filterOption);
       const filteredArr = 
-        state.filter.filterOption === 'all' ? state.todolist: // false
-        state.filter.filterOption === 'active' ?  // false
-        state.todolist.filter((item : Item) => !item.completed) : 
+        state.filter.filterOption === 'all' ? state.todolist :
+        state.filter.filterOption === 'active' ?  state.todolist.filter((item : Item) => !item.completed) : 
         state.todolist.filter((item : Item) => item.completed);
       return {
         ...state,
@@ -73,13 +73,11 @@ function reducer (state = initState, action: Actions) {
           }
         })] 
       }
-
     default:
       return state
   }
 }
 
-// let store = createStore(reducer, applyMiddleware(logger))
 let store = createStore(reducer)
 
 export default store;

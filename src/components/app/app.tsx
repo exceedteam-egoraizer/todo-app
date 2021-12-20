@@ -1,11 +1,10 @@
-import React from "react";
 import { Spin } from "antd";
 import { useSelector } from "react-redux";
 import List from "../list/list";
 import { InitStateProps } from "../interfaces";
 
 import '../../styles/reset.css';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import '../../styles/style.css';
 
 
